@@ -4,18 +4,60 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>All Blogs</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
-<body>
-    <h1>All Blogs</h1>
-    <% blogs.forEach((blog, i) => { %>
-        <div>
-            <h2><%= blog.title %></h2>
-            <p><%= blog.author %></p>
-            <p><%= blog.content %></p>
-            <form action="/delete/<%= i %>" method="POST">
-                <button>delete</button>
-            </form>
+<body class="bg-gray-100 min-h-screen p-6">
+
+    <h1 class="text-4xl font-bold text-center mb-10 text-gray-800">
+      Pizza Blogs
+    </h1>
+
+    <div class="w-[700px] mx-auto space-y-6">
+
+      <% blogs.forEach((blog, i) => { %>
+        <div class="bg-white rounded-xl shadow-md overflow-hidden 
+            flex flex-row h-[320px] relative">
+            <div class="absolute top-4 right-4 flex gap-4 z-10">
+                <form action="/edit/<%= i %>" method="GET">
+                  <button class="text-blue-600 text-xl hover:scale-110 transition">
+                    <i class="fa-solid fa-pen-to-square"></i>
+                  </button>
+                </form> 
+                <form action="/delete/<%= i %>" method="POST">
+                  <button class="text-red-600 text-xl hover:scale-110 transition">
+                    <i class="fa-solid fa-trash"></i>
+                  </button>
+                </form>
+            </div>
+
+            <div class="w-[320px] h-[320px]">
+              <img 
+                src="<%= blog.image %>" 
+                alt="<%= blog.title %>"
+                class="w-full h-full object-cover"
+              >
+            </div>
+
+            <div class="w-[340px] h-[340px] p-6 flex flex-col justify-center">
+              <h2 class="text-2xl font-bold text-gray-800 mb-3 text-center">
+                <%= blog.title %>
+              </h2>
+              <p class="text-gray-600 text-center text-[14px] leading-relaxed">
+                <%= blog.content %>
+              </p>
+            </div>
+
         </div>
-    <% }) %>
+      <% }) %>
+
+    </div>
+
+    <div class="text-center mt-10">
+      <a href="/" class="text-blue-600 font-medium hover:underline">
+        ← Back to Create Blog
+      </a>
+    </div>
+
 </body>
 </html>
